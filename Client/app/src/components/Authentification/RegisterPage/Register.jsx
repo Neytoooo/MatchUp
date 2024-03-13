@@ -1,5 +1,8 @@
+// Register.jsx
 import React, { useState } from 'react';
-import axios from 'axios'; // Assurez-vous qu'Axios est installé et importé correctement
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom'; // Importer useNavigate depuis react-router-dom
+import './Register.css';
 
 function Register() {
   const [user, setUser] = useState({
@@ -7,6 +10,7 @@ function Register() {
     email: '',
     password: '',
   });
+  const navigate = useNavigate(); // Utiliser useNavigate pour obtenir la fonction de navigation
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -19,18 +23,21 @@ function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // Remplacez 'http://localhost:3001/api/register' par l'URL de votre API
-      const response = await axios.post('http://localhost:3001/api/register', user);
-      console.log('Réponse du serveur :', response.data);
-      // Ajoutez ici la logique après une inscription réussie
+      await axios.post('http://localhost:3001/api/register', user);
+      navigate('/login'); // Redirigez vers la page de connexion en cas de succès
     } catch (error) {
-      console.error('Erreur lors de l\'inscription :', error.response ? error.response.data : error);
-      // Ajoutez ici la gestion des erreurs, comme afficher un message à l'utilisateur
+      if (error.response && error.response.status === 409) {
+        alert('Cette adresse email est déjà utilisée par un autre compte.'); // Utilisez une méthode de notification plus sophistiquée dans une vraie application
+      } else {
+        console.error('Erreur lors de l\'inscription :', error);
+      }
     }
   };
+  
 
   return (
     <div className="register-container">
+      <div className='title'>Register</div>
       <form onSubmit={handleSubmit}>
         <div>
           <label>Nom</label>
