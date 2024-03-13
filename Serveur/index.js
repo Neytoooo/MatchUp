@@ -34,21 +34,34 @@ app.use(bodyParser.json());
 app.post('/api/register', (req, res) => {
   const { name, email, password } = req.body;
   
-  // Hashage du mot de passe avant de l'insérer dans la base de données
-  bcrypt.hash(password, saltRounds, function(err, hash) {
+  // Vérifiez d'abord si l'email existe déjà
+  const checkEmailQuery = "SELECT email FROM Utilisateurs WHERE email = ?";
+  
+  connection.query(checkEmailQuery, [email], async (err, results) => {
     if (err) {
-      return res.status(500).send('Erreur lors du hashage du mot de passe');
+      return res.status(500).send('Erreur lors de la vérification de l\'email');
     }
     
-    // La requête SQL pourrait varier en fonction de la structure de votre table d'utilisateurs
-    const query = "INSERT INTO Utilisateurs (name, email, password) VALUES (?, ?, ?)";
-    
-    connection.query(query, [name, email, hash], (err, result) => {
-      if (err) {
-        return res.status(500).send(err.message);
+    if (results.length > 0) {
+      // Si l'email existe déjà, renvoyez une erreur
+      return res.status(409).send('Cette adresse email est déjà utilisée par un autre compte.');
+    } else {
+      // Si l'email n'existe pas, procédez à l'inscription
+      // Hashage du mot de passe avant de l'insérer dans la base de données
+      try {
+        const hashedPassword = await bcrypt.hash(password, saltRounds);
+        const insertQuery = "INSERT INTO Utilisateurs (name, email, password) VALUES (?, ?, ?)";
+        
+        connection.query(insertQuery, [name, email, hashedPassword], (err, result) => {
+          if (err) {
+            return res.status(500).send('Erreur lors de l\'inscription');
+          }
+          res.status(200).send('Utilisateur enregistré avec succès');
+        });
+      } catch (error) {
+        res.status(500).send('Erreur lors du hashage du mot de passe');
       }
-      res.status(200).send('Utilisateur enregistré avec succès');
-    });
+    }
   });
 });
 
