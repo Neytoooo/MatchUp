@@ -1,80 +1,50 @@
-const mysql = require('mysql2/promise');
-
-// Configuration de la connexion à la base de données
-const connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'utilisateur',
-  password: 'motdepasse',
-  database: 'nom_de_ta_base_de_donnees'
-});
-
-// Assure-toi que ta base de données est correctement connectée avant d'utiliser ce composant
+import React, { useState } from 'react';
+import axios from 'axios'; // Assurez-vous qu'Axios est installé et importé correctement
 
 function Register() {
-  const [userData, setUserData] = useState({
-    username: '',
+  const [user, setUser] = useState({
+    name: '',
     email: '',
-    password: ''
+    password: '',
   });
 
   const handleChange = (e) => {
-    setUserData({ ...userData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setUser(prevUser => ({
+      ...prevUser,
+      [name]: value,
+    }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // Connexion à la base de données
-      await connection.connect();
-      // Requête pour insérer un nouvel utilisateur dans la table Utilisateurs
-      await connection.query(
-        'INSERT INTO Utilisateurs (nom_utilisateur, email, mot_de_passe) VALUES (?, ?, ?)',
-        [userData.username, userData.email, userData.password]
-      );
-      console.log('Utilisateur enregistré avec succès !');
+      // Remplacez 'http://localhost:3001/api/register' par l'URL de votre API
+      const response = await axios.post('http://localhost:3001/api/register', user);
+      console.log('Réponse du serveur :', response.data);
+      // Ajoutez ici la logique après une inscription réussie
     } catch (error) {
-      console.error('Erreur lors de l\'enregistrement de l\'utilisateur:', error);
-    } finally {
-      // Ferme la connexion à la base de données
-      await connection.end();
+      console.error('Erreur lors de l\'inscription :', error.response ? error.response.data : error);
+      // Ajoutez ici la gestion des erreurs, comme afficher un message à l'utilisateur
     }
   };
 
   return (
     <div className="register-container">
-      <h1>Inscription</h1>
-      <form onSubmit={handleSubmit} className="register-form">
-        <label htmlFor="username">Nom d'utilisateur:</label>
-        <input
-          type="text"
-          id="username"
-          name="username"
-          value={userData.username}
-          onChange={handleChange}
-          required
-        />
-
-        <label htmlFor="email">Email:</label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          value={userData.email}
-          onChange={handleChange}
-          required
-        />
-
-        <label htmlFor="password">Mot de passe:</label>
-        <input
-          type="password"
-          id="password"
-          name="password"
-          value={userData.password}
-          onChange={handleChange}
-          required
-        />
-
-        <button type="submit" className="register-btn">S'inscrire</button>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label>Nom</label>
+          <input type="text" name="name" value={user.name} onChange={handleChange} required />
+        </div>
+        <div>
+          <label>Email</label>
+          <input type="email" name="email" value={user.email} onChange={handleChange} required />
+        </div>
+        <div>
+          <label>Mot de passe</label>
+          <input type="password" name="password" value={user.password} onChange={handleChange} required />
+        </div>
+        <button type="submit">S'inscrire</button>
       </form>
     </div>
   );
