@@ -1,0 +1,35 @@
+.header {
+    width: 100%; /* Assurez-vous que le header prend toute la largeur */
+    box-sizing: border-box; /* Garantit que padding et border sont inclus dans la largeur totale */
+    margin: 0 auto; /* Centrage horizontal si nécessaire */
+    padding: 10px 20px; /* Ajustez selon vos préférences */
+    background-color: #333; /* Couleur de fond du header */
+    color: white; /* Couleur du texte dans le header */
+    display: flex;
+    justify-content: space-between; /* Espacement entre le titre et la navigation */
+    align-items: center; /* Centrage vertical des éléments dans le header */
+  }
+  
+  .header nav ul {
+    list-style: none; /* Supprime les puces des listes */
+    padding: 0; /* Supprime le padding par défaut */
+    display: flex; /* Affichage en ligne des liens */
+    margin: 0; /* Supprime la marge par défaut */
+  }
+  
+  .header nav ul li {
+    margin-left: 20px; /* Espacement entre les liens */
+  }
+  
+  .header nav ul li a {
+    color: #fff; /* Couleur des liens */
+    text-decoration: none; /* Supprime le soulignement des liens */
+  }
+  
+  .profile-pic {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%; /* Rend l'image de profil circulaire */
+    border: 2px solid white; /* Bordure blanche autour de l'image de profil */
+  }
+  
