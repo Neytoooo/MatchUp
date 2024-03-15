@@ -1,7 +1,9 @@
-CREATE TABLE IF NOT EXISTS Utilisateurs (
+CREATE TABLE IF NOT EXISTS Messages (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    nomUtilisateur VARCHAR(255) NOT NULL,
-    email VARCHAR(255) NOT NULL,
-    motDePasse VARCHAR(255) NOT NULL,
-    dateInscription DATETIME DEFAULT CURRENT_TIMESTAMP
+    expediteurId INT,
+    destinataireId INT,
+    contenu TEXT,
+    dateEnvoi DATETIME,
+    FOREIGN KEY (expediteurId) REFERENCES Utilisateurs(id),
+    FOREIGN KEY (destinataireId) REFERENCES Utilisateurs(id)
 );
