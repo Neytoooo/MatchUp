@@ -2,7 +2,7 @@ const express = require('express');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const connection = require('./db'); // Assurez-vous que le chemin vers db.js est correct
-
+const app = express();
 const router = express.Router();
 
 // Route pour l'inscription
@@ -71,5 +71,25 @@ router.post('/api/login', (req, res) => {
     }
   });
 });
+
+router.get('/api/profile', (req, res) => {
+  // Ici, l'exemple utilise une ID fictive car req.user.id n'est pas défini dans votre exemple.
+  // Vous devez mettre en place une authentification et attribuer req.user.id selon votre logique d'authentification.
+  const userId = 1; // Cet ID doit provenir de votre système d'authentification ou de votre logique d'application.
+
+  const query = 'SELECT name, email FROM utilisateurs WHERE id = ?';
+  connection.query(query, [userId], (error, results) => {
+      if (error) {
+          console.error(error);
+          return res.status(500).send('Erreur de serveur');
+      }
+      if (results.length > 0) {
+          res.json(results[0]);
+      } else {
+          res.status(404).send('Utilisateur non trouvé');
+      }
+  });
+});
+
 
 module.exports = router;
