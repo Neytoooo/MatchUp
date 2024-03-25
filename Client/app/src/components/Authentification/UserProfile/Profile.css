@@ -3,7 +3,10 @@
   flex-direction: row; /* Changer pour l'organisation horizontale */
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-image: url('C:\Users\Administrateur\MatchUp\Client\app\public\590b5e313d1039261132870263b2bfa9.jpeg');
+  background-size: cover; /* Assurez-vous que l'image de fond couvre tout l'élément */
+  background-position: center; /* Centre l'image de fond */
+  background-repeat: no-repeat;
 }
 
 .Left, .Right {
@@ -14,23 +17,15 @@
   height: 100%; /* Assurez-vous que Left et Right prennent toute la hauteur */
 }
 
-.Account {
-  background-color: #1E1E1E;
+.Account, .Infos-Profil, .Connexion, .Amis {
+  background-color: #0F1923;
   color: white;
   width: 90%; /* Ajustez en fonction de votre besoin d'espacement */
-  margin: 0 auto; /* Centrer dans la zone Left */
-  padding: 20px;
-  margin: 20px auto; 
-  box-sizing: border-box; /* Inclut le padding dans la largeur définie */
-}
-
-.Infos-Profil {
-  background-color: #1E1E1E;
-  color: white;
-  width: 90%; /* Identique à Account pour l'alignement */
-  margin: 20px auto; /* Espace au-dessus et en dessous, centré horizontalement */
+  margin: 20px auto; /* Centrer dans la zone Left ou Right */
   padding: 20px;
   box-sizing: border-box; /* Inclut le padding dans la largeur définie */
+  border-radius: 15px;
+  border: 2px solid white;
 }
 
 .Boite {
@@ -44,10 +39,6 @@
   flex-direction: column;
   gap: 10px; /* Espace entre les éléments à l'intérieur de Connexion et Amis */
   width: 48%; /* Ajustez pour l'espacement entre Connexion et Amis */
-  background-color: #1E1E1E;
-  color: white;
-  padding: 20px;
-  box-sizing: border-box; /* Inclut le padding dans la largeur définie */
   margin-bottom: 20px; /* Espace au-dessous des boîtes Connexion et Amis */
 }
 
@@ -56,7 +47,7 @@
     width: 100%;
   }
 
-  .Account, .Infos-Profil, .Boite {
+  .Account, .Infos-Profil, .Boite, .Connexion, .Amis {
     width: 100%; /* Les éléments prennent la pleine largeur sur petits écrans */
     margin: 20px 0; /* Espace au-dessus et en dessous de chaque élément */
   }
