@@ -3,7 +3,7 @@
     box-sizing: border-box; /* Garantit que padding et border sont inclus dans la largeur totale */
     margin: 0 auto; /* Centrage horizontal si nécessaire */
     padding: 10px 20px; /* Ajustez selon vos préférences */
-    background-color: #333; /* Couleur de fond du header */
+    background-color: #0F1923; /* Couleur de fond du header */
     color: white; /* Couleur du texte dans le header */
     display: flex;
     justify-content: space-between; /* Espacement entre le titre et la navigation */

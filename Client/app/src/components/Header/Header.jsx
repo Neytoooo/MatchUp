@@ -15,7 +15,7 @@ const Header = () => {
         </ul>
       </nav>
       <div className="profile-pic">
-        <img src="C:\Users\Administrateur\Test\Client\app\public\profile.png" alt="Profile" />
+        <img src="C:\Users\Administrateur\MatchUp\Client\app\public\40095850dfd5ec99ff5cd14b51d04d33.jpg" alt="Profile" />
       </div>
     </header>
   );

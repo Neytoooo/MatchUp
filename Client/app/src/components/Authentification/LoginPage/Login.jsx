@@ -45,20 +45,22 @@ if (response.data.message === 'Connexion réussie') {
   
 
   return (
-    <div className="login-container">
-      <h2>Connexion</h2>
-      <form onSubmit={handleSubmit} className="login-form">
-        <div className="form-group">
-          <label>Email</label>
-          <input type="email" name="email" value={credentials.email} onChange={handleChange} required />
-        </div>
-        <div className="form-group">
-          <label>Mot de passe</label>
-          <input type="password" name="password" value={credentials.password} onChange={handleChange} required />
-        </div>
-        {error && <div className="error-message">{error}</div>}
-        <button type="submit" className="login-button">Se connecter</button>
-      </form>
+    <div className="container"> 
+      <div className='title'>Connexion</div> 
+      <div className="form_area"> 
+        <form onSubmit={handleSubmit} className="login-form">
+          <div className="form_group">
+            <label>Email</label>
+            <input className="form_style" type="email" name="email" value={credentials.email} onChange={handleChange} required placeholder="Entrez votre email" />
+          </div>
+          <div className="form_group">
+            <label>Mot de passe</label>
+            <input className="form_style" type="password" name="password" value={credentials.password} onChange={handleChange} required placeholder="Entrez votre mot de passe" />
+          </div>
+          {error && <div className="error-message">{error}</div>}
+          <button type="submit" className="btn">Se connecter</button>
+        </form>
+      </div>
     </div>
   );
 }

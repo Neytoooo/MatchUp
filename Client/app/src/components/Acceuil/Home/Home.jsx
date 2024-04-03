@@ -1,8 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import Chat from "../../Recherche_et_Communication/Chat/Chat";
-
-
+import './Home.css';
 function Home() {
   const navigate = useNavigate();
 
@@ -12,10 +11,10 @@ function Home() {
   };
 
   return (
-    <div>
-      <h1>Page d'accueil</h1>
-      <Chat /> {/* Intégration du composant Chat */}
-      <button onClick={handleLogout}>Déconnexion</button>
+    <div className='Container-page'>
+      <div className='Title'><h1>TeamUp</h1></div>
+      
+      <div className='Chat'><Chat /> </div>
     </div>
   );
 }

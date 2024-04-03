@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import io from 'socket.io-client';
+import './Chat.css';
 
 // Assurez-vous que l'adresse correspond à l'URL de votre serveur
 const socket = io('http://localhost:3001'); 
@@ -27,7 +28,7 @@ function Chat() {
   const sendMessage = (e) => {
     e.preventDefault();
     if (message.trim()) {
-      console.log("Envoi du message :", message); // Log pour vérifier le message envoyé
+      console.log("Envoi du message :", message); 
       socket.emit('chat message', message);
       setMessage('');
     }
@@ -35,7 +36,7 @@ function Chat() {
   
 
   return (
-    <div>
+    <div className='Container-Chat'>
       <h2>Chat en Direct</h2>
       <ul>
         {messages.map((msg, index) => (
